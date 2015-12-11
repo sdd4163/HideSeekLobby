@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.Networking.Types;
 using UnityEngine.Networking.Match;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace UnityStandardAssets.Network
 {
@@ -19,7 +19,7 @@ namespace UnityStandardAssets.Network
 				return playerCount;
 			}
 		}
-	
+       
 		// Use this for initialization
 		void Start () {
 			s_Singleton = this;
@@ -39,7 +39,7 @@ namespace UnityStandardAssets.Network
 				_lobbyHook.OnLobbyServerSceneLoadedForPlayer (this, lobbyPlayer, gamePlayer);
 				playerCount++;
 			}
-			
+            
 			return true;
 		}
 	}

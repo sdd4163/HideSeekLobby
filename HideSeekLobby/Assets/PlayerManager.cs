@@ -6,21 +6,22 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class PlayerManager : MonoBehaviour {
-
-	//private Player[] players;
-	//public Player[] Players {
-	//	get {
-	//		return players;
-	//	}
-	//	set {
-	//		players = value;
-	//	}
-	//}
+public class PlayerManager : NetworkBehaviour {
+    
+    private List<Player> players;
+    public List<Player> Players
+    {
+		get {
+			return players;
+		}
+		set {
+			players = value;
+		}
+	}
 
 	// Use this for initialization
 	void Start () {
-
+        DontDestroyOnLoad(gameObject);
 	}
 	
 	// Update is called once per frame

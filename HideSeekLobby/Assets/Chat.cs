@@ -10,7 +10,7 @@ public class Chat : NetworkBehaviour
     const short chatMsg = MsgType.Highest + 1;
 
     private SyncListString chatLog = new SyncListString();
-
+    
     public static NetworkClient myClient;
     private GameObject textArea;
     private bool active;
@@ -24,22 +24,25 @@ public class Chat : NetworkBehaviour
     string username;
     [SerializeField]
     GameObject chatFieldObject;
+    [SerializeField]
+    GameObject chatInputObject;
     bool chatFieldActive;
     public void SetName(string _name) { username = _name; }
-    [SerializeField]
     float Timer;
 
 
     //	 Use this for initialization
     void Start()
     {
+     
         textArea = GameObject.Find("Canvas");
         textArea.SetActive(false);
-        active = true;
+        active = false;
         chatLog.Callback = OnChatUpdated;
         //setup text boxes
         chatWindow.text = "";
         Timer = 0;
+     
         NetworkServer.RegisterHandler(chatMsg, OnServerPostChatMessage);
         chatFieldActive = false;
         chatInput.onEndEdit.AddListener(delegate
@@ -59,28 +62,48 @@ public class Chat : NetworkBehaviour
     }
     void FixedUpdate()
     {
+       
+      
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
+            
             if (active)
             {
-                textArea.SetActive(true);
-                active = false;
+                if (chatFieldActive)
+                {
+                    chatFieldActive = false;
+                    chatInputObject.SetActive(chatFieldActive);
+                }
+                else
+                {
+                    chatFieldActive = true;
+                    chatInputObject.SetActive(chatFieldActive);
+                    chatInput.Select();
+                }
+                
             }
-            chatFieldActive = !chatFieldActive;
-            chatFieldObject.SetActive(chatFieldActive);
-            if (chatFieldActive) chatInput.Select();
+            else
+            {
+                active = true;
+                chatFieldActive = true;
+                textArea.SetActive(active);
+                chatFieldObject.SetActive(chatFieldActive);
+                chatInput.Select();
+            }
+            
             Timer = 0;
         }
-        if (active == false)
+        if (active)
         {
             Timer += Time.fixedDeltaTime;
         }
-        if (Timer > 5)
+        if (Timer > 7)
         {
-            active = true;
-            textArea.SetActive(false);
+            active = false;
+            textArea.SetActive(active);
             Timer = 0;
         }
+       
     }
     /*
 	 * [Server] 
