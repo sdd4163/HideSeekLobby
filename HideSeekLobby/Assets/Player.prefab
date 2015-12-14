@@ -67,13 +67,15 @@ GameObject:
   - 143: {fileID: 14381872}
   - 222: {fileID: 22286680}
   - 114: {fileID: 11468294}
-  - 114: {fileID: 11442116}
   - 114: {fileID: 11401048}
   - 114: {fileID: 11496920}
-  - 114: {fileID: 11440178}
+  - 114: {fileID: 11477484}
+  - 114: {fileID: 11428236}
+  - 114: {fileID: 11442124}
+  - 114: {fileID: 11473520}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -349,33 +351,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useHistoricalLerping: 1
---- !u!114 &11440178
+--- !u!114 &11428236
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187620}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11ec5191ef26a0343a6ee3035a473461, type: 3}
+  m_Script: {fileID: 11500000, guid: 5703de976c1ab9447ba32ad1cf361ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   abilityID: 0
   color: {r: 0, g: 0, b: 0, a: 0}
---- !u!114 &11442116
+--- !u!114 &11442124
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187620}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48fb48e1bcf72164b8a3d7828bd6df11, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a86ccb76c94f224d8b45a972fb94949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FPSCam: {fileID: 2052342}
-  audioListener: {fileID: 8194390}
-  isHider: 0
+  abilityID: 0
+  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &11463272
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -424,7 +425,7 @@ MonoBehaviour:
   m_MouseLook:
     XSensitivity: 2
     YSensitivity: 2
-    clampVerticalRotation: 0
+    clampVerticalRotation: 1
     MinimumX: -90
     MaximumX: 90
     smooth: 0
@@ -495,6 +496,32 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8bc94ec6ed537e743b481638bdcd503d, type: 3}
   m_JumpSound: {fileID: 8300000, guid: 5897aeed9b676024fbb8c694b421a861, type: 3}
   m_LandSound: {fileID: 8300000, guid: 3b09d59f4499d45428baa7a21e954296, type: 3}
+--- !u!114 &11473520
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 594330958db953f429457cbc434de632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showDebugging: 1
+--- !u!114 &11477484
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b66dfc674b7c2ea4eb13d41b924ffb10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FPSCam: {fileID: 2052342}
+  audioListener: {fileID: 8194390}
+  isHider: 0
 --- !u!114 &11482174
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -770,7 +797,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_MouseLook.clampVerticalRotation
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: camTransform
@@ -786,7 +813,7 @@ Prefab:
       objectReference: {fileID: 8194390}
     - target: {fileID: 0}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_JumpSound
@@ -808,6 +835,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4b5dce0492bdfb648a389fe390071625, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187620}
