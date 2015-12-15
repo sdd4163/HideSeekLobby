@@ -351,7 +351,6 @@ GameObject:
   - 4: {fileID: 1889027268}
   - 114: {fileID: 1889027269}
   - 114: {fileID: 1889027267}
-  - 114: {fileID: 1889027270}
   m_Layer: 0
   m_Name: LobbyManager
   m_TagString: Untagged
@@ -367,7 +366,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1889027266}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f33ee57e3ca5c74458f28f9c068b39d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ce33ca9c18a3d948a672062a8741e5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_NetworkPort: 7777
@@ -454,14 +453,3 @@ MonoBehaviour:
   showGUI: 1
   offsetX: 0
   offsetY: 0
---- !u!114 &1889027270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1889027266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8aa1500fd9d66f48a8a97d249f77e65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

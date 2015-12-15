@@ -13,7 +13,6 @@ GameObject:
   - 54: {fileID: 5406046}
   - 82: {fileID: 8259976}
   - 114: {fileID: 11432404}
-  - 114: {fileID: 11408520}
   m_Layer: 0
   m_Name: FPSController 1
   m_TagString: Untagged
@@ -251,20 +250,6 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!114 &11408520
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48fb48e1bcf72164b8a3d7828bd6df11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FPSCam: {fileID: 2053872}
-  audioListener: {fileID: 8119376}
-  isHider: 0
 --- !u!114 &11422826
 MonoBehaviour:
   m_ObjectHideFlags: 1
