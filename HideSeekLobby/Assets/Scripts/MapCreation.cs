@@ -28,23 +28,10 @@ public class MapCreation : NetworkBehaviour {
     public GameObject Terrain4;
     public bool host;
     GameObject[] terrains = new GameObject[6];
-    bool first = true;
     bool instantiated = false;
     bool generated = false;
 	// Use this for initialization
 	void Start () {
-        if (first)
-        {
-            Vector3 a = new Vector3(0, 0, 0);
-            for (int i = 0; i < mazepieces; i++)
-            {
-                GenerateMap();      
-            }
-          
-            
-            first = false;
-            generated = true;
-        }
         if (instantiated == false)
         {
             InstantiateMap();
@@ -70,7 +57,11 @@ public class MapCreation : NetworkBehaviour {
         positions.Add(new Vector3(0, 0, 200));
         positions.Add(new Vector3(0, 0, 250));
         positions.Add(new Vector3(50, 0, 50));
-        
+		for (int i = 0; i < mazepieces; i++)
+		{
+			GenerateMap();      
+		}
+		generated = true;
     }
    
     

@@ -16,14 +16,14 @@ public class PlayerSyncPosition : NetworkBehaviour
 
 
 	private float lerpRate;
-	private float normalLerpRate = 16;
-	private float fasterLerpRate = 27;
+	private float normalLerpRate = 30;
+	private float fasterLerpRate = 60;
 
 	private NetworkClient nwClient ;
 
 	//variables to only send data when it's changed beyond a threshold.
 	private Vector3 lastPosition;
-	private float positionThreshold = 0.1f;
+	private float positionThreshold = 0.3f;
 	private List<Vector3> syncPosList = new List<Vector3> ();
 
 
@@ -58,6 +58,7 @@ public class PlayerSyncPosition : NetworkBehaviour
 	{
 		//runs on server, we call on client
 		syncPos = pos;
+		//Debug.Log("Position sent");
 	}
 	
 
@@ -102,7 +103,7 @@ public class PlayerSyncPosition : NetworkBehaviour
 	void OrdinaryLerp ()
 	{
 		transform.position = Vector3.Lerp (transform.position, syncPos, Time.deltaTime * lerpRate);
-
+		//Debug.Log("Ordinary");
 	}
 
 	void HistoricalLerp ()
@@ -114,9 +115,9 @@ public class PlayerSyncPosition : NetworkBehaviour
 			if (Vector3.Distance (transform.position, syncPosList [0]) < positionThreshold) {
 				syncPosList.RemoveAt (0);
 			}
-
+			//Debug.Log("Historical lerp");
 			// if we don't have so many in the list, lerp faster
-			if (syncPosList.Count > 10) {
+			if (syncPosList.Count < 10) {
 				lerpRate = fasterLerpRate;
 			} else {
 				lerpRate = normalLerpRate;
