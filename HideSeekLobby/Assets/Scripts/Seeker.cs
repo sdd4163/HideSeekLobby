@@ -6,7 +6,7 @@ public class Seeker : Player {
 
 	// Use this for initialization
 	void Start () {
-	
+        isHider = false;
 	}
 	
 	// Update is called once per frame

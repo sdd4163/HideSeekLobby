@@ -35,12 +35,14 @@ public class PlayerNetStartup : NetworkBehaviour
 				GetComponent<Seeker>().enabled = true;
 				Destroy(GetComponent<Hider>());
 				gameObject.name = "Seeker";
+				gameObject.tag = "Seeker";
 			}
 			else{
 				isHider = true;
 				GetComponent<Hider>().enabled = true;
 				Destroy(GetComponent<Seeker>());
 				gameObject.name = "Hider";
+				gameObject.tag = "Hider";
 			}
 			GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController> ().enabled = true;
 			FPSCam.enabled = true;
@@ -50,11 +52,13 @@ public class PlayerNetStartup : NetworkBehaviour
 			GetComponent<Hider>().enabled = true;
 			Destroy(GetComponent<Seeker>());
 			gameObject.name = "Hider";
+			gameObject.tag = "Hider";
 		}
 		else{
 			GetComponent<Seeker>().enabled = true;
 			Destroy(GetComponent<Hider>());
 			gameObject.name = "Seeker";
+			gameObject.tag = "Seeker";
 		}
 	}
 }

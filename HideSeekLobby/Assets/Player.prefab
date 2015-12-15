@@ -362,6 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5703de976c1ab9447ba32ad1cf361ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHider: 0
   abilityID: 0
   color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &11442124
@@ -375,6 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a86ccb76c94f224d8b45a972fb94949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHider: 0
   abilityID: 0
   color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &11463272
