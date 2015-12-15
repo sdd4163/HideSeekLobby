@@ -506,7 +506,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 404196512}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 149.199997, y: 2.29399419, z: 168.600006}
+  m_LocalPosition: {x: 156.990005, y: 4.09000015, z: 172.899994}
   m_LocalScale: {x: 1, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1157,7 +1157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HiderSpawn: {fileID: 102138, guid: 0c9e90076a4a9164dab080ad0d616661, type: 2}
   SeekerSpawn: {fileID: 162162, guid: 63beefb00767276499d9da7a57a42cb7, type: 2}
-  Terrain1: {fileID: 140072, guid: 36292b4e2a3195e4385d80e1ad4f6bd0, type: 2}
+  Terrain1: {fileID: 107778, guid: 5b2422699501017488db3315372939c9, type: 2}
   Terrain2: {fileID: 116310, guid: bae140e78ae758943985e9bf5fa62219, type: 2}
   Terrain3: {fileID: 143974, guid: 3eca5856b812c7a47ae687fa0e3f12c6, type: 2}
   Terrain4: {fileID: 124202, guid: 4127cb6cae5c42e429aed34bc2c2d173, type: 2}
@@ -2400,7 +2400,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 906358232}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: .5
   m_Height: 2
   m_Direction: 1
@@ -2619,7 +2619,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1147276283}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: .5
   m_Height: 2
   m_Direction: 1
@@ -2896,7 +2896,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1321968261}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.78999996, y: 2.29399419, z: -7.23999977}
+  m_LocalPosition: {x: -5.63000011, y: 2.57999992, z: -14.7299995}
   m_LocalScale: {x: 1, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
