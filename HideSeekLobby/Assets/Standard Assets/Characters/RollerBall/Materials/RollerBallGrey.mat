@@ -74,14 +74,14 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _Occlusion
+          name: _MetallicGlossMap
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _MetallicGlossMap
+          name: _Occlusion
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -121,7 +121,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: .818000019
+        second: .823000014
       data:
         first:
           name: _BumpScale
@@ -174,15 +174,15 @@ Material:
       data:
         first:
           name: _EmissionColor
-        second: {r: .159602076, g: .602941155, b: .162659571, a: 1}
+        second: {r: .29022494, g: .897058845, b: .645955145, a: 1}
       data:
         first:
           name: _Color
-        second: {r: .498039216, g: .498039216, b: .498039216, a: 1}
+        second: {r: .108486459, g: .198529422, b: .072988756, a: 1}
       data:
         first:
           name: _SpecColor
-        second: {r: .551470578, g: .551470578, b: .551470578, a: 1}
+        second: {r: 0, g: 0, b: 0, a: 1}
       data:
         first:
           name: _EmissionColorUI
