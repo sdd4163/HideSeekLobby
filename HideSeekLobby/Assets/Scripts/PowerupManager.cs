@@ -2,7 +2,7 @@
 using UnityEngine.Networking;
 using System.Collections.Generic;
 
-public class PowerupManager : MonoBehaviour {
+public class PowerupManager : NetworkBehaviour {
 
     static public PowerupManager s_Singleton;
 
@@ -34,10 +34,13 @@ public class PowerupManager : MonoBehaviour {
 
     float timer;
 
+	int spawnIndex;
+
     void Awake () {
 
         s_Singleton = this;
 
+		spawnIndex = 0;
         timer = 0.0f;
         seekersPopulated = false;
 
@@ -52,9 +55,14 @@ public class PowerupManager : MonoBehaviour {
         spawnPosition9 = new Vector3(Random.Range(119.0f, 130.0f), 6.5f, Random.Range(23.0f, 33.0f));
         spawnPosition10 = new Vector3(Random.Range(119.0f, 130.0f), 6.5f, Random.Range(23.0f, 33.0f));*/
 
-        for(int i=0; i<10; i++)
+        for(int i=0; i<50; i++)
         {
-            spawnList.Add(new Vector3(Random.Range(119.0f, 150.0f), 6.5f, Random.Range(13.0f, 50.0f)));
+			if (Random.Range(0.0f, 1.0f) > 0.5f){
+				spawnList.Add(new Vector3(Random.Range(-5.0f, 175.0f), 1.5f, Random.Range(-5.0f, 45.0f)));
+			}
+			else{
+				spawnList.Add(new Vector3(Random.Range(-5.0f, 45.0f), 1.5f, Random.Range(-5.0f, 185.0f)));
+			}
         }
         /*spawnList.Add(spawnPosition1);
         spawnList.Add(spawnPosition2);
@@ -73,13 +81,23 @@ public class PowerupManager : MonoBehaviour {
 	void Start () {
         startPos = new Vector3(0.0f, -100.0f, 0.0f);
 
-        GameObject speed = (GameObject)Instantiate(speedBoostPrefab, startPos, Quaternion.identity);
-        GameObject reduce = (GameObject)Instantiate(speedReducePrefab, startPos, Quaternion.identity);
-        GameObject freeze = (GameObject)Instantiate(freezePrefab, startPos, Quaternion.identity);
+		for(int i=0; i<10; i++)
+		{
+        	GameObject speed = (GameObject)Instantiate(speedBoostPrefab, startPos, Quaternion.identity);
+        	powerupList.Add(speed);
+		}
 
-        powerupList.Add(speed);
-        powerupList.Add(reduce);
-        powerupList.Add(freeze);
+		for(int i=0; i<powerupList.Count; i++)
+		{
+			powerupList[i].GetComponent<Powerup>().isSpawned = true;
+			powerupList[i].transform.position = spawnList[i];
+			spawnIndex++;
+			NetworkServer.Spawn (powerupList[i]);
+
+			spawnedPowerups.Add (powerupList[i]);
+			powerupList.RemoveAt (i);
+		}
+        
 
         createLists();
     }
@@ -87,24 +105,6 @@ public class PowerupManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-
-        //Spawn a new Powerup every x seconds
-        if(timer>10.0f && powerupList.Count>0)
-        {
-            int index = Random.Range(0, powerupList.Count);
-            powerupList[index].transform.position = spawnList[index];
-            powerupList[index].GetComponent<Powerup>().isSpawned = true;
-            NetworkServer.Spawn(powerupList[index]);
-
-            spawnedPowerups.Add(powerupList[index]);
-            powerupList.RemoveAt(index);
-            spawnList.RemoveAt(index);
-
-            spawnPowerup(speedBoostPrefab);
-            timer = 0.0f;
-        }
-
         //Check for collisions between Players and Powerup's if there are spawned powerups and players
         if (spawnedPowerups.Count > 0 && playerList.Count > 0)
         {
@@ -133,12 +133,15 @@ public class PowerupManager : MonoBehaviour {
                             //Give the "ability" to all the seekers
                             foreach (GameObject s in seekers)
                             {
-                                s.GetComponent<Player>().GainAbility(powerup.GetComponent<Powerup>().abilityID);
-
+								s.GetComponent<Player>().abilityID = powerup.GetComponent<Powerup>().abilityID;
                             }
                             //Despawn the powerup
-                            powerup.GetComponent<Powerup>().isSpawned = false;
-                            powerup.transform.position = new Vector3(0.0f, -100.0f, 0.0f);
+							powerup.transform.position = spawnList[spawnIndex];
+							spawnIndex++;
+							if(spawnIndex == spawnList.Count)
+							{
+								spawnIndex = 0;
+							}
                         }
 
                     }
@@ -146,14 +149,19 @@ public class PowerupManager : MonoBehaviour {
                     {
                         if (checkCollision(playerPos, powerupPos))
                         {
-                            Debug.Log("Current abilityID: " + player.GetComponent<Player>().abilityID);
-                            Debug.Log("You collided with ability: " + powerup.GetComponent<Powerup>().abilityID);
-
-                            PlayerGainAbility(powerup.GetComponent<Powerup>().abilityID, player);
+                            //PlayerGainAbility(powerup.GetComponent<Powerup>().abilityID, player);
+							player.GetComponent<Player>().abilityID = powerup.GetComponent<Powerup>().abilityID;
+							if (player.tag == "Seeker"){
+								player.GetComponent<Player>().abilityID = 0;
+							}
 
                             //Despawn the powerup
-                            powerup.GetComponent<Powerup>().isSpawned = false;
-                            powerup.transform.position = new Vector3(0.0f, -100.0f, 0.0f);
+							powerup.transform.position = spawnList[spawnIndex];
+							spawnIndex++;
+							if(spawnIndex == spawnList.Count)
+							{
+								spawnIndex = 0;
+							}
                         }
                     }
 
@@ -194,11 +202,12 @@ public class PowerupManager : MonoBehaviour {
 
     void createLists()
     {
-        GameObject[] players;
+        GameObject[] seekers;
 
-        players = GameObject.FindGameObjectsWithTag("Player");
+        seekers = GameObject.FindGameObjectsWithTag("Seeker");
 
-        foreach (GameObject p in players)
+		playerList.Add(GameObject.Find("Hider"));
+        foreach (GameObject p in seekers)
         {
             playerList.Add(p);
         }

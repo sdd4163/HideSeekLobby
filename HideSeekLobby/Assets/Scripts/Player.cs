@@ -24,11 +24,8 @@ public class Player : NetworkBehaviour {
 		}
 	}
 
-	public int abilityID;
-	//protected PlayerManager playManager;
-
 	[SyncVar]
-	public Color color;
+	public int abilityID;
 
     protected float abilityCountdown;
     protected float abilityTimer;
@@ -50,21 +47,25 @@ public class Player : NetworkBehaviour {
         abilityCountdown = 10.0f;
         abilityTimer = 0.0f;
         abilityID = 0;
-        Debug.Log("Ability Countdown Start: " + abilityCountdown);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        UseAbility();
+		if (isLocalPlayer){
+			UseAbility();
+		}
+        
         //Debug.Log("Ability Countdown Update: " + abilityCountdown);
     }
 
 	void UseAbility () {
         //Use ability if you have one
-
+		Debug.Log ("Ability");
         if (abilityID == 1)
         {
-            GetComponent<FirstPersonController>().m_WalkSpeed = 8;
+            gameObject.GetComponent<FirstPersonController>().m_WalkSpeed = 12;
+			gameObject.GetComponent<FirstPersonController>().m_RunSpeed = 12;
+			Debug.Log ("boost");
         }
         else if (abilityID == 2)
         {
@@ -79,18 +80,18 @@ public class Player : NetworkBehaviour {
         {
             //Increment timer
             abilityTimer += Time.deltaTime;
-            Debug.Log("Ability Timer: " + abilityTimer);
-            Debug.Log("Ability Countdown: " + abilityCountdown);
+			Debug.Log (abilityTimer);
             if (abilityTimer >= abilityCountdown)
             {
-                Debug.Log("Ran out of ability");
                 abilityTimer = 0.0f;
                 abilityID = 0;
                 GetComponent<CharacterController>().enabled = true;
                 GetComponent<FirstPersonController>().m_WalkSpeed = 5;
+				GetComponent<FirstPersonController>().m_RunSpeed = 10;
                 return;
             }
         }
+
     }
 
 	public void GainAbility (int itemID) {

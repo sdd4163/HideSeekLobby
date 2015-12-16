@@ -23,14 +23,14 @@ public class GameStates : NetworkBehaviour {
     {
         seekerWin = true;
         gameObject.GetComponent<Clock>().on = false;
-        gameObject.GetComponent<Clock>().CmdUpdateText("The Seekers Won!");
+        gameObject.GetComponent<Clock>().CmdUpdateText("The Seekers Won!", true);
     }
     [Command]
     public void CmdHiderWin()
     { 
         hiderWin = true;
         gameObject.GetComponent<Clock>().on = false;
-        gameObject.GetComponent<Clock>().CmdUpdateText("The Hider Won!");
+        gameObject.GetComponent<Clock>().CmdUpdateText("The Hider Won!", true);
     }
     
    

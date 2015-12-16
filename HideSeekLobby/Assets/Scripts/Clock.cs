@@ -9,9 +9,10 @@ public class Clock : NetworkBehaviour {
     int timeInMinutes = 0;
     [SerializeField]
     public Text clockText;
-   public bool on= true;
-   [SyncVar]
-   string clockTime;
+	public GameObject panel;
+    public bool on = true;
+    [SyncVar]
+    string clockTime;
 	// Use this for initialization
 	void Start () {
 	
@@ -32,24 +33,25 @@ public class Clock : NetworkBehaviour {
             timeInSeconds = Mathf.FloorToInt(timeInSeconds % 60);
            if (timeInSeconds < 10)
             {
-                 CmdUpdateText(timeInMinutes.ToString() + ":0" + timeInSeconds);
+                 CmdUpdateText(timeInMinutes.ToString() + ":0" + timeInSeconds, false);
             }
             else if (timeInSeconds == 60)
             {
                 timeInMinutes++;
-                CmdUpdateText(timeInMinutes.ToString() + ":00");
+                CmdUpdateText(timeInMinutes.ToString() + ":00", false);
             }
             else
             {
-                 CmdUpdateText(timeInMinutes.ToString() + ":" + timeInSeconds);
+                 CmdUpdateText(timeInMinutes.ToString() + ":" + timeInSeconds, false);
             }
         }
         clockText.text = clockTime;
 	}
     [Command]
-  public void CmdUpdateText(string text)
+  	public void CmdUpdateText(string text, bool activate)
     {
         clockText.text = text;
+		panel.SetActive(activate);
         clockTime = text;
     }
 
