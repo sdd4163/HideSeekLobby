@@ -6,7 +6,6 @@ public class Seeker : Player {
 
 	// Use this for initialization
 	void Start () {
-        isHider = false;
 	}
 	
 	// Update is called once per frame
@@ -20,11 +19,10 @@ public class Seeker : Player {
 	[Command]
 	void CmdCheckTag(GameObject hider, GameObject seeker) {
 		float distance = Vector3.Distance (hider.transform.position, seeker.transform.position);
-		Debug.Log ("Tag Attempt2");
 		if (distance < 3.0f) {
+			//Ends game
 			hider.gameObject.GetComponent<CharacterController>().enabled = false;
             GameObject.Find("ScriptManager").GetComponent<GameStates>().CmdSeekerWin();
-			Debug.Log("Tagged");
 		} else {
 			Debug.Log("Not Tagged");
 		}
@@ -32,7 +30,7 @@ public class Seeker : Player {
 	
 	[Client]
 	void TransmitTaggers () {
-		Debug.Log ("Tag Attempt1");
+		//Tells Server to check distance
 		GameObject hider = GameObject.Find ("Hider");
 		CmdCheckTag(hider, gameObject);
 	}

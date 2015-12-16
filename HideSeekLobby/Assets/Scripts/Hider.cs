@@ -5,6 +5,6 @@ public class Hider : Player {
 
 	// Use this for initialization
 	void Start () {
-        isHider = true;
+		//Unused, features that use it never implemented
 	}
 }

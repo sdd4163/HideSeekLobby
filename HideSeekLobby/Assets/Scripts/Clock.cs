@@ -51,8 +51,13 @@ public class Clock : NetworkBehaviour {
   	public void CmdUpdateText(string text, bool activate)
     {
         clockText.text = text;
-		panel.SetActive(activate);
+		if (activate){
+			ActivatePanel();
+		}
         clockTime = text;
     }
-
+	[Client]
+	void ActivatePanel(){
+		panel.SetActive(true);
+	}
 }

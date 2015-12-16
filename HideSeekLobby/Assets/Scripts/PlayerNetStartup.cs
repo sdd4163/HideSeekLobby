@@ -13,13 +13,7 @@ public class PlayerNetStartup : NetworkBehaviour
 	
 	void Start ()
 	{
-		/*
-		 * We turned off the character controller, firstperson controller, 
-		 * the main camera and its audiolistener, because only OUR OWN character should respond to 
-		 * keyboard events and control the camer, not all the other clients.
-		 * 
-		 * So here we turn them all back on IF IT'S US. 
-		 * */
+		//Check all players in scene, see if a hider has been made
 		GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 		bool hiderMade = false;
 		foreach (GameObject p in players){
@@ -28,10 +22,12 @@ public class PlayerNetStartup : NetworkBehaviour
 			}
 		}
 
+		//Only actual players in clients
 		if (isLocalPlayer) {
 			GameObject.Find ("Scene Camera").SetActive (false);
 			GetComponent<CharacterController> ().enabled = true;
 			if (hiderMade){
+				//Creates player as a Seeker
 				GetComponent<Seeker>().enabled = true;
 				Destroy(GetComponent<Hider>());
 				gameObject.name = "Seeker";
@@ -41,6 +37,7 @@ public class PlayerNetStartup : NetworkBehaviour
 				}
 			}
 			else{
+				//Creates player as a Hider
 				isHider = true;
 				GetComponent<Hider>().enabled = true;
 				Destroy(GetComponent<Seeker>());
@@ -48,12 +45,12 @@ public class PlayerNetStartup : NetworkBehaviour
 				foreach (MeshRenderer mr in gameObject.GetComponentsInChildren<MeshRenderer>()){
 					mr.material.color = Color.blue;
 				}
-				//gameObject.tag = "Hider";
 			}
 			GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController> ().enabled = true;
 			FPSCam.enabled = true;
 			audioListener.enabled = true;
 		}
+		//Non-local player objects
 		else if (isHider){
 			GetComponent<Hider>().enabled = true;
 			Destroy(GetComponent<Seeker>());
@@ -61,7 +58,6 @@ public class PlayerNetStartup : NetworkBehaviour
 			foreach (MeshRenderer mr in gameObject.GetComponentsInChildren<MeshRenderer>()){
 				mr.material.color = Color.blue;
 			}
-			//gameObject.tag = "Hider";
 		}
 		else{
 			GetComponent<Seeker>().enabled = true;

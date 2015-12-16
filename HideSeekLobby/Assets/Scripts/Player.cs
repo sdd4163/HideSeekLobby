@@ -4,26 +4,6 @@ using UnityEngine.Networking;
 using UnityStandardAssets.Characters.FirstPerson;
 
 public class Player : NetworkBehaviour {
-
-    public bool isHider;
-
-	protected int playerID;		//0 is hider, all others are seekers
-	public int PlayerID {
-		get {
-			return playerID;
-		}
-		set {
-			playerID = value;
-		}
-	}
-
-	protected Transform playerTransform;
-	public Transform PlayerTransform {
-		get {
-			return playerTransform;
-		}
-	}
-
 	[SyncVar]
 	public int abilityID;
 
@@ -33,8 +13,6 @@ public class Player : NetworkBehaviour {
 
     void Awake()
     {
-        isHider = false;
-
         abilityCountdown = 10.0f;
         abilityTimer = 0.0f;
         abilityID = 0;
@@ -42,8 +20,6 @@ public class Player : NetworkBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		playerTransform = gameObject.transform;
-
         abilityCountdown = 10.0f;
         abilityTimer = 0.0f;
         abilityID = 0;
