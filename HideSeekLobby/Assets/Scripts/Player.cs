@@ -24,7 +24,6 @@ public class Player : NetworkBehaviour {
 		}
 	}
 
-    [SyncVar]
 	public int abilityID;
 	//protected PlayerManager playManager;
 
@@ -38,58 +37,59 @@ public class Player : NetworkBehaviour {
     void Awake()
     {
         isHider = false;
+
+        abilityCountdown = 10.0f;
+        abilityTimer = 0.0f;
+        abilityID = 0;
     }
 
 	// Use this for initialization
 	void Start () {
 		playerTransform = gameObject.transform;
 
-        abilityCountdown = 15.0f;
+        abilityCountdown = 10.0f;
         abilityTimer = 0.0f;
         abilityID = 0;
+        Debug.Log("Ability Countdown Start: " + abilityCountdown);
 	}
 	
 	// Update is called once per frame
 	void Update () {
         UseAbility();
-	}
+        //Debug.Log("Ability Countdown Update: " + abilityCountdown);
+    }
 
 	void UseAbility () {
         //Use ability if you have one
-        if (abilityID == 0)
-        {
-            //Debug.Log("YOU HAVE NO POWERUPS");
-            return;
-        }
 
         if (abilityID == 1)
         {
-            //Debug.Log("Speed Boost");
-            GetComponent<FirstPersonController>().m_WalkSpeed = 15;
+            GetComponent<FirstPersonController>().m_WalkSpeed = 8;
         }
         else if (abilityID == 2)
         {
-            //Debug.Log("Ability 2");
-            GetComponent<FirstPersonController>().m_WalkSpeed = 4;
+            GetComponent<FirstPersonController>().m_WalkSpeed = 3;
         }
         else if (abilityID == 3)
         {
             GetComponent<CharacterController>().enabled = false;
         }
-        else if (abilityID == 4)
-        {
 
-        }
-
-        //Increment timer
-        abilityTimer += Time.deltaTime;
-        if (abilityTimer >= abilityCountdown)
+        if (abilityID != 0)
         {
-            abilityTimer = 0.0f;
-            abilityID = 0;
-            GetComponent<CharacterController>().enabled = true;
-            GetComponent<FirstPersonController>().m_WalkSpeed = 8;
-            return;
+            //Increment timer
+            abilityTimer += Time.deltaTime;
+            Debug.Log("Ability Timer: " + abilityTimer);
+            Debug.Log("Ability Countdown: " + abilityCountdown);
+            if (abilityTimer >= abilityCountdown)
+            {
+                Debug.Log("Ran out of ability");
+                abilityTimer = 0.0f;
+                abilityID = 0;
+                GetComponent<CharacterController>().enabled = true;
+                GetComponent<FirstPersonController>().m_WalkSpeed = 5;
+                return;
+            }
         }
     }
 
@@ -111,5 +111,6 @@ public class Player : NetworkBehaviour {
                 //Debug.Log("No ability");
                 break;
         }
-	}
+        Debug.Log("Gained ability: " + abilityID);
+    }
 }
