@@ -21,8 +21,9 @@ public class Seeker : Player {
 	void CmdCheckTag(GameObject hider, GameObject seeker) {
 		float distance = Vector3.Distance (hider.transform.position, seeker.transform.position);
 		Debug.Log ("Tag Attempt2");
-		if (distance < 2.0f) {
+		if (distance < 3.0f) {
 			hider.gameObject.GetComponent<CharacterController>().enabled = false;
+            GameObject.Find("ScriptManager").GetComponent<GameStates>().CmdSeekerWin();
 			Debug.Log("Tagged");
 		} else {
 			Debug.Log("Not Tagged");

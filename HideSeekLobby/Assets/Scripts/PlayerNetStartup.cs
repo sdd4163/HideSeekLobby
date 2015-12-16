@@ -35,13 +35,19 @@ public class PlayerNetStartup : NetworkBehaviour
 				GetComponent<Seeker>().enabled = true;
 				Destroy(GetComponent<Hider>());
 				gameObject.name = "Seeker";
-				//gameObject.tag = "Seeker";
+				gameObject.tag = "Seeker";
+				foreach (MeshRenderer mr in gameObject.GetComponentsInChildren<MeshRenderer>()){
+					mr.material.color = Color.red;
+				}
 			}
 			else{
 				isHider = true;
 				GetComponent<Hider>().enabled = true;
 				Destroy(GetComponent<Seeker>());
 				gameObject.name = "Hider";
+				foreach (MeshRenderer mr in gameObject.GetComponentsInChildren<MeshRenderer>()){
+					mr.material.color = Color.blue;
+				}
 				//gameObject.tag = "Hider";
 			}
 			GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController> ().enabled = true;
@@ -52,13 +58,19 @@ public class PlayerNetStartup : NetworkBehaviour
 			GetComponent<Hider>().enabled = true;
 			Destroy(GetComponent<Seeker>());
 			gameObject.name = "Hider";
+			foreach (MeshRenderer mr in gameObject.GetComponentsInChildren<MeshRenderer>()){
+				mr.material.color = Color.blue;
+			}
 			//gameObject.tag = "Hider";
 		}
 		else{
 			GetComponent<Seeker>().enabled = true;
 			Destroy(GetComponent<Hider>());
 			gameObject.name = "Seeker";
-			//gameObject.tag = "Seeker";
+			gameObject.tag = "Seeker";
+			foreach (MeshRenderer mr in gameObject.GetComponentsInChildren<MeshRenderer>()){
+				mr.material.color = Color.red;
+			}
 		}
 	}
 }
