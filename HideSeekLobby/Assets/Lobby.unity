@@ -420,7 +420,7 @@ MonoBehaviour:
   matchName: default
   matchSize: 4
   m_ShowLobbyGUI: 1
-  m_MaxPlayers: 4
+  m_MaxPlayers: 8
   m_MaxPlayersPerConnection: 1
   m_MinPlayers: 0
   m_LobbyPlayerPrefab: {fileID: 11403826, guid: 0a19981f6a7bfd349b7e687d86e4255a,
