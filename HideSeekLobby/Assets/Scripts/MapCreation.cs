@@ -85,7 +85,7 @@ public class MapCreation : NetworkBehaviour {
                 {
                     for (int j = 0; j < 5; j++)
                     {
-                        Debug.Log(SyncListMapIndex.Count);
+                      //  Debug.Log(SyncListMapIndex.Count);
                         Instantiate(terrains[SyncListMapIndex[counter]], new Vector3(origin.x + i * 10, origin.y + 0, origin.z + j * 10), new Quaternion(0, 0, 0, 0));
                         counter++;
                     }

@@ -23,6 +23,7 @@ public class Seeker : Player {
 		Debug.Log ("Tag Attempt2");
 		if (distance < 2.0f) {
 			hider.gameObject.GetComponent<CharacterController>().enabled = false;
+            GameObject.Find("ScriptManager").GetComponent<GameStates>().CmdSeekerWin();
 			Debug.Log("Tagged");
 		} else {
 			Debug.Log("Not Tagged");
